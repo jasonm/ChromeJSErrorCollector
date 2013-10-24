@@ -22,7 +22,7 @@ var JSErrorCollector = {
 	clear: function() {
 		this.saveErrors([]);
 	},
-	onError: function(errorMessage, sourceName, lineNumber) {
+	onError: function(errorMessage, sourceName, lineNumber, columnNumber, errorObject) {
 		if(!errorMessage.message) {
 			return;
 		}
@@ -43,14 +43,18 @@ var JSErrorCollector = {
 				errorMessage: errorMessage,
 				sourceName: '',
 				lineNumber: 0,
-				pageUrl: document.location.href	
+				pageUrl: document.location.href,
+				columnNumber: 0,
+				stack: ''
 			}
 		} else {
 			var error = {
 				errorMessage: errorMessage.replace(/^Uncaught /g, ''),
 				sourceName: sourceName,
 				lineNumber: lineNumber,
-				pageUrl: document.location.href	
+				pageUrl: document.location.href,
+				columnNumber: columnNumber,
+				stack: errorObject && errorObject.stack
 			}
 		}
 
