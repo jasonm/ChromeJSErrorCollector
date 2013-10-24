@@ -45,7 +45,8 @@ var JSErrorCollector = {
 				lineNumber: 0,
 				pageUrl: document.location.href,
 				columnNumber: 0,
-				stack: ''
+				stack: '',
+				timestamp: performance ? (performance.timing.navigationStart + performance.now()) : Date.now()
 			}
 		} else {
 			var error = {
@@ -54,7 +55,8 @@ var JSErrorCollector = {
 				lineNumber: lineNumber,
 				pageUrl: document.location.href,
 				columnNumber: columnNumber,
-				stack: errorObject && errorObject.stack
+				stack: errorObject && errorObject.stack,
+				timestamp: performance ? (performance.timing.navigationStart + performance.now()) : Date.now()
 			}
 		}
 
